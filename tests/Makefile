@@ -24,7 +24,7 @@ mem.o: ../src/mem.c
 
 mem-val: ../src/mem.c mem-val.c
 	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@
-	valgrind --leak-check=full  ./mem-val
+	valgrind -v --leak-check=full  ./mem-val
 
 test_ustr.o: ustr.c
 	$(CC) $(CFLAGS) $(LDFLAGS) -c $< -o $@
