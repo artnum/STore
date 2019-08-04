@@ -30,7 +30,7 @@ UStr ustr_fromUChar (const UChar * string, const size_t len) {
   copy[len] = '\0';
 
   result.content = copy;
-  result.length = (int32_t)len + 1;
+  result.length = (int32_t)len;
   return result;
   
  fail_and_return:
