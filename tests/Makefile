@@ -1,5 +1,5 @@
 LDFLAGS=-licuuc -lcheck_pic -pthread -lrt -lm -lsubunit
-CFLAGS=-I../include/ -Wall -pthread -ggdb
+CFLAGS=-I../include/ -Wall -pthread -ggdb -DNDEBUG
 CHEKC=/usr/lib/x86_64-linux-gnu/libcheck.a
 CC=gcc
 RM=rm
