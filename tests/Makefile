@@ -11,6 +11,7 @@ all: tests
 clean:
 	$(RM) -f *.o
 	$(RM) -f mem-val
+	$(RM) -f mtrack-val
 	$(RM) -f tests
 
 tests: mem.o test_mem.o tests.c test_ustr.o ustr.o test_mtrack.o mtrack.o
@@ -22,9 +23,11 @@ test_mem.o: mem.c
 mem.o: ../src/mem.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-mem-val: ../src/mem.c mem-val.c
-	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@
-	valgrind -v --leak-check=full  ./mem-val
+valgrind: ../src/mem.c mem-val.c ../src/mtrack.c mtrack-val.c
+	$(CC) $(CFLAGS) $(LDFLAGS) ../src/mem.c mem-val.c -o mem-val
+	$(CC) $(CFLAGS) $(LDFLAGS) ../src/mtrack.c mtrack-val.c -o mtrack-val
+	valgrind --leak-check=full  ./mem-val
+	valgrind --leak-check=full  ./mtrack-val
 
 test_ustr.o: ustr.c
 	$(CC) $(CFLAGS) $(LDFLAGS) -c $< -o $@
