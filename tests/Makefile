@@ -13,7 +13,7 @@ clean:
 	$(RM) -f mem-val
 	$(RM) -f tests
 
-tests: mem.o test_mem.o tests.c test_ustr.o ustr.o
+tests: mem.o test_mem.o tests.c test_ustr.o ustr.o test_mtrack.o mtrack.o
 	$(CC) $^ $(CFLAGS) $(LDFLAGS) /usr/lib/x86_64-linux-gnu/libcheck.a -o $@
 
 test_mem.o: mem.c
@@ -30,4 +30,10 @@ test_ustr.o: ustr.c
 	$(CC) $(CFLAGS) $(LDFLAGS) -c $< -o $@
 
 ustr.o: ../src/ustr.c
+	$(CC) $(CFLAGS) $(LDFLAGS) -c $< -o $@
+
+test_mtrack.o: mtrack.c
+	$(CC) $(CFLAGS) $(LDFLAGS) -c $< -o $@
+
+mtrack.o: ../src/mtrack.c
 	$(CC) $(CFLAGS) $(LDFLAGS) -c $< -o $@
